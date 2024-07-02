@@ -5,7 +5,7 @@ import java.util.Random;
 public abstract class Theme {
 	protected ArrayList<ArrayList<String>> mensonges;
     protected ArrayList<String> verites;
-    protected ArrayList<Integer> choosenNumbers= new ArrayList<Integer>();
+    private int choix;
     private Random alea;
     
     private int placeVerite;
@@ -21,15 +21,16 @@ public abstract class Theme {
         return verites;
     }
     
-    public ArrayList<String> gameSet(){
+    public ArrayList<String> gameSet(ArrayList<Integer> choosenNumbers){
     	ArrayList<String> setJeu = new ArrayList<String>();
     	alea=new Random();
     	int res = alea.nextInt(verites.size());
     	while (choosenNumbers.contains(res)) {
+    		System.out.println("here");
     		res=alea.nextInt(verites.size());
     	}
-    	choosenNumbers.add(res);
     	System.out.println(res);
+    	choix=res;
     	placeVerite=alea.nextInt(3);
     	switch(placeVerite) {
     	case 0:
@@ -63,5 +64,9 @@ public abstract class Theme {
     public int getPlaceVerite() {
     	return placeVerite;
     }
+
+	public int getChoix() {
+		return choix;
+	}
         
 }

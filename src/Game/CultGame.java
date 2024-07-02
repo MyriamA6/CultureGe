@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -22,6 +23,9 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 	ArrayList<Image> images;
 	
 	ArrayList<ArrayList<Integer>> positions;
+	
+    private ArrayList<Integer> choosenNumbersHist= new ArrayList<Integer>();
+    private ArrayList<Integer> choosenNumbersDivers= new ArrayList<Integer>();
 	
 	Theme jeu;
 	
@@ -39,9 +43,19 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 	
 	private final int boardwidth=505;
 	private final int boardheight=505;
+	JButton b;
+
 
 	
-	public CultGame() {		
+	public CultGame() {	
+		b=new JButton();
+		
+		b.setBounds(180, 390, 150, 50);
+		b.addActionListener(this);
+        b.setOpaque(false);
+        b.setContentAreaFilled(false);
+        b.setBorderPainted(false);
+        
 		images=new ArrayList<Image>();
 		positions = new ArrayList<ArrayList<Integer>>();		
 		
@@ -56,15 +70,36 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 	public void chooseTheme() {
 		positions.add(new ArrayList<Integer>(Arrays.asList(0, 0)));
 		this.addImage("src//debut.png");
+		this.add(b);
 		this.repaint();
 	}
 	
 	public void start_game() {
 		reset();
+		this.remove(b);
+		this.revalidate();
+		this.repaint();
 		this.setPosition();
 		this.addImage("src//fondCultGe.png");
 		this.addImage("src//question.png");
-		this.addImages(jeu.gameSet());
+		if (jeu instanceof Histoire) {
+			if (choosenNumbersHist.size()==jeu.getVerites().size()) {
+				choosenNumbersHist= new ArrayList<Integer>();
+			}
+			this.addImages(jeu.gameSet(choosenNumbersHist));
+			choosenNumbersHist.add(jeu.getChoix());
+
+		}
+		else {
+			if (choosenNumbersDivers.size()==jeu.getVerites().size()) {
+				choosenNumbersDivers= new ArrayList<Integer>();
+			}
+			this.addImages(jeu.gameSet(choosenNumbersDivers));
+			choosenNumbersDivers.add(jeu.getChoix());
+
+
+
+		}
 		this.addImages(new ArrayList<String>(Arrays.asList(
 				"src//arrow//a1.png",
 				"src//arrow//a2.png",
@@ -118,8 +153,16 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		move();
-		repaint();
+		if (e.getSource()==b) {
+			reset();
+			positions.add(new ArrayList<Integer>(Arrays.asList(0, 0)));
+			this.addImage("src//score.png");
+			this.repaint();
+		}
+		else {
+			move();
+			repaint();
+		}
 		
 	}
 	
@@ -142,7 +185,7 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 		case 6 :
 			
 			positions.get(i).set(1,positions.get(i).get(1)-1);
-			if (positions.get(i).get(1)==181) {
+			if (positions.get(i).get(1)==211) {
 				afficheResult(result);
 				movementOn.stop();
 
@@ -150,7 +193,7 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 			break;
 		case 7 :
 			positions.get(i).set(0,positions.get(i).get(0)-1);
-			if (positions.get(i).get(0)==-60) {
+			if (positions.get(i).get(0)==-30) {
 				afficheResult(result);
 				movementOn.stop();
 
@@ -158,7 +201,7 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 			break;
 		case 8 :
 			positions.get(i).set(0,positions.get(i).get(0)+1);
-			if (positions.get(i).get(0)==60) {
+			if (positions.get(i).get(0)==30) {
 				afficheResult(result);
 				movementOn.stop();
 
@@ -166,7 +209,7 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 			break;
 		case 9 :
 			positions.get(i).set(1,positions.get(i).get(1)+1);
-			if (positions.get(i).get(1)==491) {
+			if (positions.get(i).get(1)==461) {
 				afficheResult(result);
 				movementOn.stop();
 

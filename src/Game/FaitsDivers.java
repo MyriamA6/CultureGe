@@ -19,12 +19,18 @@ public class FaitsDivers extends Theme{
         mensongesSet.add("src//PGanimal//3.png");
         mensongesSet.add("src//PGanimal//2.png");  
         mensonges.add(mensongesSet);
-
+        
+        mensongesSet = new ArrayList<>();
+        mensongesSet.add("src//Stlib//4.png");
+        mensongesSet.add("src//Stlib//3.png");
+        mensongesSet.add("src//Stlib//2.png");  
+        mensonges.add(mensongesSet);
         
 
         //Ajout vérités
         verites.add("src//capAustralie//verite.png");
         verites.add("src//PGanimal//verite.png");
+        verites.add("src//Stlib//verite.png");
 
         
         
