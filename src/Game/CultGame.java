@@ -29,6 +29,8 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 	
 	Theme jeu;
 	
+	int fin=0;
+	
 	Scanner themeChoice;
 	
 	int choosenImage;
@@ -146,9 +148,17 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
         for(int i=0; i<images.size();i++) {
         	g2.drawImage(images.get(i), positions.get(i).get(0),positions.get(i).get(1),this);
         }
-        g2.setFont(new Font("Arial", Font.PLAIN, 20));
-        g2.setColor(new Color(91, 146, 209));
-		g2.drawString("Score : " + score, 13, 25);
+        if (fin==1) {
+        	g2.setFont(new Font("Arial", Font.PLAIN, 60));
+            g2.setColor(new Color(91, 146, 209));
+    		g2.drawString(""+score, 235, 265);
+        }
+        else {
+        	g2.setFont(new Font("Arial", Font.PLAIN, 20));
+        	g2.setColor(new Color(91, 146, 209));
+    		g2.drawString("Score : " + score, 13, 25);
+        }
+        
    }
 
 	@Override
@@ -157,6 +167,7 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 			reset();
 			positions.add(new ArrayList<Integer>(Arrays.asList(0, 0)));
 			this.addImage("src//score.png");
+			fin =1;
 			this.repaint();
 		}
 		else {
