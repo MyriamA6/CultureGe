@@ -14,13 +14,14 @@ public class Main {
 			
             CultGame game = new CultGame();
             JFrame frame = new JFrame("Cult Game");
-    		frame.setSize(505,505);
+    		frame.setSize(500,500);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.getContentPane().add(game);
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
             game.chooseTheme();
-    		frame.pack();
+            frame.pack();
+
 
             
 			});

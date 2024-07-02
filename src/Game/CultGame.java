@@ -43,8 +43,8 @@ public class CultGame extends JPanel implements ActionListener,KeyListener{
 	
 	int gagne;
 	
-	private final int boardwidth=505;
-	private final int boardheight=505;
+	private final int boardwidth=500;
+	private final int boardheight=500;
 	JButton b;
 
 
